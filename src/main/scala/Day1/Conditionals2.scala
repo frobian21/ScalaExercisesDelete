@@ -9,6 +9,7 @@ object Conditionals2 extends App{
   }
   println(s"sum(2,0,true) is ${sum(2,0,true)}")
   println(s"sum(0,3,false) is ${sum(0,3,false)}")
+  println(s"sum(0,0,false) is ${sum(0,0,false)}")
   println(s"sum(2,3,true) is ${sum(2,3,true)}")
   println(s"sum(2,3,false) is ${sum(2,3,false)}")
 }

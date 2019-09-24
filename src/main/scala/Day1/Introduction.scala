@@ -13,6 +13,7 @@ object Introduction{
   a += 1, increment.
   println(raw"test \n line") removes formatting
   println(s"") or println(f"${2.009439040}%2.2f") -> f is morew advanced, can add decimal places
+  list :+ append, list +: prepend
   */
   def main(args: Array[String]): Unit = {
     println("hey there")

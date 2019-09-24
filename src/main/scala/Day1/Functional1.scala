@@ -5,5 +5,5 @@ object Functional1 extends App{
     .filter(elem => elem.size!=1)
     .map(_.last)
     .grouped(10)
-    .foreach(elem => println(elem))
+    .foreach(elem => print(elem(1) + ", "))
 }

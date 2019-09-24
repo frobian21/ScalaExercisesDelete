@@ -16,7 +16,7 @@ object Introduction{
   */
   def main(args: Array[String]): Unit = {
     println("hey there")
-    println(f"${2.009439040}%1.2f")
+    println(f"${2.009439040}%.2f")
     for(i <- 1 to 10 by 2) print(i+" ")
     print("\n")
     for(i <- 10 to 1 by -1) print(i+" ")

@@ -17,5 +17,17 @@ object Iteration4 extends App {
     repeaterRec(name, input.abs, 1)
   }
 
+  def squareRepeater(name: String, count: Int) ={
+
+    @tailrec
+    def squareRepeaterRec(name: String, end: Int, count: Int):Unit = {
+      println(name.repeat(end))
+      if(count<end)
+        squareRepeaterRec(name, end, count+1)
+    }
+
+    squareRepeaterRec(name, count, 1)
+  }
   repeater("He",2)
+  squareRepeater("he", 4)
 }

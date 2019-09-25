@@ -15,7 +15,7 @@ object Iteration3 extends App{
   fizzBuzz("Fizz", "Buzz", 15)
 
   def fizzBuzz2(firstWord: String, secondWord: String, count: Int)={
-    var output = new StringBuilder("")
+    val output = new StringBuilder("")
     for(i<-1 to count){
       val aResult = i%3==0
       val bResult = i%5==0

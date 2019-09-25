@@ -17,7 +17,8 @@ object Main extends App{
   }
 
   class Garage(){
-    List
+//    val vehicles = new List[Vehicle]
+//    val employees = new List[Employee]
 
   }
   

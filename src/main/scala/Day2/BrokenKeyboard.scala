@@ -9,9 +9,10 @@ object BrokenKeyboard extends App{
     println("=============================\nGive number of lines to read:")
     val linesToRead=scala.io.StdIn.readInt()
     val input = new Array[String](linesToRead)
-    for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine()
+    for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine().replaceAll("[^a-zA-Z]","").toLowerCase()
+    input.map(println(_))
     println("================\nLongest word(s):")
-    input.map(filterWordList(_))
+      input.map(filterWordList(_))
     } catch {
       case e: Error => println(e)
       case _ => println("Something went wrong")

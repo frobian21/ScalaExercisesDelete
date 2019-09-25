@@ -31,9 +31,10 @@ object Iteration4 extends App {
   def fizzBuzz(word1: String, word2: String, count: Int): Unit ={
     @tailrec
     def fizzBuzzRec(word1: String, word2: String, end: Int, count: Int = 1): Unit ={
-      if(count%3==0 && count%5==0) print(word1+word2)
-      else if(count%3==0) print(word1)
-      else if(count%5==0) print(word2)
+      val firstCase = count%3==0; val secondCase = count%5==0
+      if(firstCase && secondCase) print(word1+word2)
+      else if(firstCase) print(word1)
+      else if(secondCase) print(word2)
       else print(count)
       if(count<end) {
         print(",")

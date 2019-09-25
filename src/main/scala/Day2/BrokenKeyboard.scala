@@ -11,8 +11,6 @@ object BrokenKeyboard extends App{
       val input = new Array[String](linesToRead)
       for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine().replaceAll("[^a-zA-Z]","").toLowerCase()
         //filtering input, not necessary.
-      input.map(println(_))
-      println("================\nLongest word(s):")
       //time it
       input.map(time{filterWordList(_)})
     } catch {
@@ -21,7 +19,11 @@ object BrokenKeyboard extends App{
     }
   }
   def filterWordList(str: String)={
+    println("===============")
+    println(s"String is $str")
+    println("Longest word:")
     println(wordList.filter(_ matches s"([$str]+)").foldLeft("")((a: String, b: String) =>{if(a.length > b.length) a else b}))
+    println("Longest word containg all the characters:")
     println(wordList.filter(_.toSet == str.toSet).foldLeft("")((a: String, b: String) =>{if(a.length > b.length) a else b}))
   }
   def time[R](block: => R): R = {

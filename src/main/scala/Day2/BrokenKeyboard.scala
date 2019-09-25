@@ -5,15 +5,20 @@ object BrokenKeyboard extends App{
   val wordList = Source.fromURL("http://norvig.com/ngrams/enable1.txt").mkString.split("\n").toList
   //println(wordList(1))
   def lineReader(): Unit ={
-    println("Give number of lines to read:")
+    try{
+    println("=============================\nGive number of lines to read:")
     val linesToRead=scala.io.StdIn.readInt()
     val input = new Array[String](linesToRead)
     for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine()
-    println(s"Successfully read $linesToRead lines")
-    for (i <- 0 until linesToRead) filterWordList(input(i))
+    println("================\nLongest word(s):")
+    input.map(filterWordList(_))
+    } catch {
+      case e: Error => println(e)
+      case _ => println("Something went wrong")
+    }
   }
   def filterWordList(str: String)={
-    println(wordList.filter{s => s matches s"([$str]+)"}.foldLeft("")((a: String, b: String) =>{if(a.length > b.length) a else b}))
+    println(wordList.filter(_ matches s"([$str]+)").foldLeft("")((a: String, b: String) =>{if(a.length > b.length) a else b}))
   }
   lineReader()
 }

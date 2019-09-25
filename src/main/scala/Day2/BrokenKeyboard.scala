@@ -10,6 +10,7 @@ object BrokenKeyboard extends App{
     val linesToRead=scala.io.StdIn.readInt()
     val input = new Array[String](linesToRead)
     for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine().replaceAll("[^a-zA-Z]","").toLowerCase()
+      //filtering input, not necessary.
     input.map(println(_))
     println("================\nLongest word(s):")
       input.map(filterWordList(_))

@@ -1,5 +1,7 @@
 package Garage
 
+import scala.util.Random
+
 abstract case class Vehicle(){
   val ID: String
   val regNo: String

@@ -17,7 +17,7 @@ class Garage(){
   def fixVehicle(searchID: String): Unit ={
     vehicles.filter(_.ID==searchID).foreach(_.isFixed=true)
   }
-  def garageContents(): Unit ={
+  def getContents(): Unit ={
     println("Garage contents are:")
     vehicles.map(println(_))
   }
@@ -30,9 +30,9 @@ class Garage(){
   def closeGarage(): Unit ={
     if(isOpen) isOpen=false
   }
-  def calculateBills(vehicle: Vehicle): Unit = {
-    case vehicle:Car => println(s"Bill is £${vehicle.days*50}")
-    case vehicle: Bike => println(s"Bill is £${vehicle.days*35}")
-  }
+//  def calculateBills(vehicle: Vehicle) = {
+//    case vehicle:Car => println(s"Bill is £${vehicle.days*50}")
+//    case vehicle: Bike => println(s"Bill is £${vehicle.days*35}")
+//  }
 }
 

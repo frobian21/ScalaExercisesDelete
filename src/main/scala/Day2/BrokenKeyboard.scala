@@ -3,13 +3,13 @@ package Day2
 object BrokenKeyboard extends App{
   import scala.io.Source
   val wordList = Source.fromURL("http://norvig.com/ngrams/enable1.txt").mkString.split("\n").toList
-  //println(wordList(1))
   def lineReader(): Unit ={
     try{
       println("=============================\nGive number of lines to read:")
       val linesToRead=scala.io.StdIn.readInt()
       val input = new Array[String](linesToRead)
-      for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine().replaceAll("[^a-zA-Z]","").toLowerCase()
+      for (i <- 0 until linesToRead) input(i)=scala.io.StdIn.readLine()
+        .replaceAll("[^a-zA-Z]","").toLowerCase()
         //filtering input, not necessary.
       //time it
       input.map(time{filterWordList(_)})
@@ -22,15 +22,21 @@ object BrokenKeyboard extends App{
     println("===============")
     println(s"String is $str")
     println("Longest word:")
-    println(wordList.filter(_ matches s"([$str]+)").foldLeft("")((a: String, b: String) =>{if(a.length > b.length) a else b}))
+    println(wordList.filter(_ matches s"([$str]+)")
+      .foldLeft("")((longestWord: String, possibleNewLongestWord: String) =>{
+        if(longestWord.length > possibleNewLongestWord.length) longestWord else possibleNewLongestWord
+      }))
     println("Longest word containg all the characters:")
-    println(wordList.filter(_.toSet == str.toSet).foldLeft("")((a: String, b: String) =>{if(a.length > b.length) a else b}))
+    println(wordList.filter(_.toSet == str.toSet)
+      .foldLeft("")((longestWord: String, possibleNewLongestWord: String) =>{
+        if(longestWord.length > possibleNewLongestWord.length) longestWord else possibleNewLongestWord
+      }))
   }
   def time[R](block: => R): R = {
-    val t0 = System.nanoTime()
+    val startTime = System.nanoTime()
     val result = block    // call-by-name
-    val t1 = System.nanoTime()
-    println("Elapsed time: " + (t1 - t0) + "ns")
+    val endTime = System.nanoTime()
+    println("Elapsed time: " + (endTime - startTime) + "ns")
     result
   }
   lineReader()

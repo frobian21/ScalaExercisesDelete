@@ -27,19 +27,21 @@ object MorseCode extends App{
     ".--" -> "W",
     "-..-" -> "X",
     "-.--" -> "Y",
-    "--.." -> "Z"
+    "--.." -> "Z",
+    "/" -> " "
   ).withDefaultValue("")
 
   def morseStringToString(morse:String):String={
-    morse.split("\\s/\\s").map(morseCodeMap).foldLeft("")(_+_)
+    morse.split("\\s").map(_.split("(?<=/)")).flatten.map(morseCodeMap).foldLeft("")(_+_)
   }
 
   def StringToMorseString(str: String):String={
-    str.toCharArray.map(char => morseCodeMap.find(_._2==char.toString.toUpperCase).getOrElse("","")._1.concat(" / ")).foldLeft("")(_+_)
+    str.toCharArray.map(char => morseCodeMap.find(_._2==char.toString.toUpperCase).getOrElse("","")._1.concat(" ")
+      .replaceAll("/ ", "/")).foldLeft("")(_+_)
   }
 
-  val morseString="..- / --.-"
-  val string = "hello"
+  val morseString="..- /--.-"
+  val string = "hello my friends"
   println(s"$morseString is ${morseStringToString(morseString)}")
   println(s"$string is ${StringToMorseString(string)}")
   println(s"${StringToMorseString(string)} is ${morseStringToString(StringToMorseString(string))}")

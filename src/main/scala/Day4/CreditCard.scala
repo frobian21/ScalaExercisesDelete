@@ -18,6 +18,7 @@ object CreditCard extends App{
     }
     number+check.toString
   }
+
   val number = "4992739871"
   val number2 = number.concat("6")
   println(s"$number2 is valid Luhn number: ${checkNumber(number2)}")

@@ -35,10 +35,11 @@ object Lumberjack extends App{
   }
 
   def printGrid()={
+    println("Final Arrangement:")
     for{
       i <- 0 until gridSize*gridSize by gridSize
       j <- 0 until gridSize
-      k = j match {case 0 => "\n"; case _ =>""}
+      k = (i, j) match {case (0, 0) => ""; case (_,0) =>"\n"; case (_,_) => ""}
     }
     print(s"$k${grid(i+j)} ")
   }

@@ -40,9 +40,12 @@ class CalculatorTest extends BaseTestingClass{
     assert(calculator.multiply(7,5.05)==35.35)
   }
 
-  test("Use calculator to return division of two doubles"){
-    assert(calculator.divide(10.5,5.0)==2.1)
-    assert(calculator.divide(5.1, 10.0)==0.51)
+  test("Use calculator to return division of two doubles") {
+    assert(calculator.divide(10.5, 5.0) == 2.1)
+    assert(calculator.divide(5.1, 10.0) == 0.51)
   }
-
+  test("Use calculator to return sum of negative integers"){
+    assert(calculator.sum(-10, -2) == -12)
+    assert(calculator.sum(-12, 2) == -10)
+  }
 }

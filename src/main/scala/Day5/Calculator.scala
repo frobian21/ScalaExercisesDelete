@@ -16,5 +16,6 @@ class Calculator {
   def divide[T](num1:T, num2:T)(implicit n:Numeric[T])= {
     import n._
     if(num2 != 0) (math rint  (num1.toDouble / num2.toDouble) * 1000) / 1000
+    else 0.asInstanceOf[T]
   }
 }

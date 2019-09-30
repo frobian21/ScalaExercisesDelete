@@ -13,7 +13,7 @@ class CalculatorTest extends BaseTestingClass{
   }
   test("Use calculator to return difference of two numbers"){
     assert(calculator.subtract(10,8)==2)
-    assert(calculator.subtract(8,10)==-2)
+    assert(calculator.subtract(8,10)==(-2))
   }
   test("Use calculator to return multiple of two numbers"){
     assert(calculator.multiply(10,8)==80)

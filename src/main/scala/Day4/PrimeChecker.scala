@@ -7,8 +7,8 @@ object PrimeChecker extends App {
   import scala.util.{Failure, Success}
 
   val startTime = System.currentTimeMillis()
-  val limit = 1000000
-  val lowerLimit = 3000000
+  val limit = 10000
+  val lowerLimit = 1000
   // set of wheel "hit" positions for a 2/3/5 wheel rolled twice as per the Atkin algorithm
   val hitPositions = List(1,7,11,13,17,19,23,29,31,37,41,43,47,49,53,59)
   val hitPositionsAll = List.tabulate(limit/60+1)(num =>hitPositions.map(_+60*num)).flatMap(num => num)
@@ -86,15 +86,13 @@ object PrimeChecker extends App {
       for(n<-lowerLimit to limit){
         if(outputMap.contains(n) && outputMap(n)) println(n)
       }
+      println(outputMap.filter(_._1 > lowerLimit).filter(_._1 < limit).filter(_._2==true).size)
       val endTime = System.currentTimeMillis()
       println("Elapsed time: " + (endTime - startTime) + "ms")
     case Failure(e) => e.printStackTrace()
   }
 
-
-
-
-  sleep(3*60*1000)
+  sleep(5*60*1000)
 
   def sleep(time: Long): Unit = Thread.sleep(time)
 }

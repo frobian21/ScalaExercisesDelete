@@ -11,7 +11,7 @@ class Calculator {
     num1*num2
   }
   def divide(num1:Int, num2:Int):Float= {
-    ???
+    num1.toFloat/num2
   }
 
 }

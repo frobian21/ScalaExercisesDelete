@@ -34,12 +34,12 @@ class CalculatorTest extends BaseTestingClass{
     assert(calculator.subtract(8.2,10.3)==(-2.1))
   }
 
-//  test("Use calculator to return multiple of two doubles"){
-//    assert(calculator.multiply(10.0,8.5)==85.0)
-//    assert(calculator.multiply(8.3,10.0)==83)
-//    assert(calculator.multiply(7,5.01)==35.35)
-//  }
-//
+  test("Use calculator to return multiple of two doubles"){
+    assert(calculator.multiply(10.0,8.5)==85.0)
+    assert(calculator.multiply(8.3,10.0)==83)
+    assert(calculator.multiply(7,5.05)==35.35)
+  }
+
 //  test("Use calculator to return division of two doubles"){
 //    assert(calculator.divide(10.5,5.0)==2.01)
 //    assert(calculator.divide(5.1, 10.0)==0.51)

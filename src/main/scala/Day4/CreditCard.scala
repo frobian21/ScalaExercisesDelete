@@ -1,5 +1,7 @@
 package Day4
 
+import scala.annotation.tailrec
+
 object CreditCard extends App{
   def calculateLuhnNumber(number:String):Int={
     number.toCharArray.map(_.getNumericValue).reverse.zipWithIndex.map(myTuple => myTuple._1.toInt*(myTuple._2%2+1))
@@ -11,12 +13,10 @@ object CreditCard extends App{
   def checkNumber(number:String): Boolean={
     calculateLuhnNumber(number)==0
   }
-  def makeNumberLuhnNumber(number:String):String={
-    var check = 0;
-    while(check<10 && !checkNumber(number+check.toString)){
-      check+=1
-    }
-    number+check.toString
+  @tailrec
+  def makeNumberLuhnNumber(number:String, check:Int = 0):String={
+    if(!checkNumber(number+check.toString)) makeNumberLuhnNumber(number, check+1)
+    else number+check.toString
   }
 
   val number = "4992739871"

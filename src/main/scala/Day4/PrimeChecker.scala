@@ -110,5 +110,32 @@ class PrimeChecker{
 
     count
   }
-
+  def ListPrimeChecker(limit1:Int, limit2:Int):Int = {
+    @tailrec
+    def checkNextIsPrime(primeList: List[Int], nextInt: Int):List[Int]= {
+      var newPrimeList = primeList
+      if (isPrimeRec(primeList, nextInt)) newPrimeList = primeList:+nextInt
+      if (nextInt+2 > math.max(limit1,limit2)) newPrimeList
+      else checkNextIsPrime(newPrimeList, getNextInt(nextInt))
+    }
+    @tailrec
+    def isPrimeRec(primeList: List[Int], maybePrime: Int): Boolean = {
+      primeList match {
+        case Nil => true
+        case prime::_ if prime*prime > maybePrime => true
+        case prime::_ if maybePrime % prime == 0 => false
+        case _ :: tail => isPrimeRec(tail, maybePrime)
+      }
+    }
+    @tailrec
+    def getNextInt(nextInt:Int):Int ={
+      if (Set(1,7,11,13,17,19,23,29,31,37,41,43,47,49,53,59) contains (nextInt+2)%60) nextInt+2
+      else getNextInt(nextInt+2)
+    }
+    val startTime = System.currentTimeMillis()
+    val finalList = (2::3::5::checkNextIsPrime(List(), 7)).count(_>math.min(limit1,limit2))
+    val endTime = System.currentTimeMillis()
+    println("Elapsed time: " + (endTime - startTime) + "ms")
+    finalList
+  }
 }

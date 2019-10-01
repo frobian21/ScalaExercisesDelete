@@ -1,6 +1,6 @@
 package Day6
 
-class LongestSubSequence {
+class StringManipulator {
   def longestSubSequence(string1:String, string2:String, subsequence:String=""):String={
     val str1 = string1.toLowerCase
     val str2 = string2.toLowerCase

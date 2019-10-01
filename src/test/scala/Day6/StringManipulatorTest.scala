@@ -19,7 +19,7 @@ class StringManipulatorTest extends BaseTestingClass{
   test("shortest sequence to transform hell to hello"){
     assert(manipulator.shortestTransform("hell", "hello").equals("Ins(m,5)"))
   }
-  test("shortest sequence to transform hell to hello"){
+  test("shortest sequence to transform hell to helm"){
     assert(manipulator.shortestTransform("hell", "helm").equals("Del(l,4), Ins(m,4)"))
   }
 }

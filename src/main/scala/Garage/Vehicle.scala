@@ -7,7 +7,6 @@ abstract case class Vehicle(){
   val regNo: String
   val make: String
   var isFixed: Boolean
-  var days: Int
   val parts: Array[Part]
   val owner: Customer
 }

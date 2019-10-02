@@ -24,7 +24,6 @@ class Garage(){
   def openGarage(): Unit ={
     if(isOpen==false){
       isOpen = true
-      vehicles.foreach(_.days += 1)
     }
   }
   def closeGarage(): Unit ={

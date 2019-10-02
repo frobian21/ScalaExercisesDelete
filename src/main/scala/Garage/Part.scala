@@ -2,7 +2,7 @@ package Garage
 
 import scala.util.Random
 
-case class Part(val name: String, var isBroken: Boolean, var hoursToFix: Int = 0)
+case class Part(name: String, var isBroken: Boolean, var hoursToFix: Int = 0)
 
 object Part{
   val acceptedParts = Set[String]("door", "bonnet", "window", "engine", "tires", "seat", "bumper",

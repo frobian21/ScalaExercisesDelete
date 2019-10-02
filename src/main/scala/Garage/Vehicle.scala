@@ -2,11 +2,11 @@ package Garage
 
 import scala.util.Random
 
-abstract case class Vehicle(){
+abstract class Vehicle(){
   val ID: String
   val regNo: String
   val make: String
-  var isFixed: Boolean
+  val isFixed: Boolean
   val parts: Array[Part]
   val owner: Customer
 }

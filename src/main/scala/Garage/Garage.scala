@@ -11,18 +11,18 @@ class Garage(){
   def removeVehicle(searchTerm: String): Unit ={
     vehicles = vehicles.filter(_.ID != searchTerm).filter(_.make != searchTerm)
   }
-  def registerEmployee(employee: Employee)={
+  def registerEmployee(employee: Employee): Unit ={
     employees ::= employee
   }
   def fixVehicle(searchID: String): Unit ={
-    vehicles.filter(_.ID==searchID).foreach(_.isFixed=true)
+//    vehicles.filter(_.ID==searchID).foreach(_.isFixed=true)
   }
   def getContents(): Unit ={
     println("Garage contents are:")
-    vehicles.map(println(_))
+    vehicles.foreach(println(_))
   }
   def openGarage(): Unit ={
-    if(isOpen==false){
+    if (!isOpen){
       isOpen = true
     }
   }

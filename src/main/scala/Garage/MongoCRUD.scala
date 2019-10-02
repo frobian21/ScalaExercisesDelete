@@ -77,25 +77,29 @@ object MongoCRUD extends DBConnection {
     closeConnection(mongoClient)
   }
 
-  //  def documentToCar(value:Document):Vehicle={
-  //    new Car(value.get("ID").asInstanceOf[String],
-  //      value.get("regNo").asInstanceOf[String],
-  //      value.get("make").asInstanceOf[String],
-  //      value.get("isFixed").asInstanceOf[Boolean],
-  //      value.get("parts"),
-  //      value.get("owner"))
-  //  }
-  //  def documentToBike(value:Document)={
-  //    new Bike(value.get("ID").asInstanceOf[String],
-  //      value.get("regNo").asInstanceOf[String],
-  //      value.get("make").asInstanceOf[String],
-  //      value.get("isFixed").asInstanceOf[Boolean],
-  //      documentToParts(value.get("parts").asInstanceOf[BsonArray[Document]]),
-  //      value.get("owner"))
-  //  }
-  //  def documentToParts(value:BsonArray[Document]):Array[Part]={
-  //    value.forEach(a => a.asInstanceOf[BsonDocument]).toArray
-  //  }
-  //
-  //  }
+//    def documentToCar(value:Document):Vehicle={
+//      new Car(value.get("ID").asInstanceOf[String],
+//        value.get("regNo").asInstanceOf[String],
+//        value.get("make").asInstanceOf[String],
+//        value.get("isFixed").asInstanceOf[Boolean],
+//        value.get("parts"),
+//        value.get("owner"))
+//    }
+//    def documentToBike(value:Document)={
+//    val parts:Array[Part] = documentToParts(value.get("parts"))
+//    val owner = new Customer(value.get("owner").getOrElse("").toString)
+//      Bike(value.get("ID").asInstanceOf[String],
+//        value.get("regNo").asInstanceOf[String],
+//        value.get("make").asInstanceOf[String],
+//        value.get("isFixed").asInstanceOf[Boolean],
+//        parts,
+//        owner)
+//    }
+//    def documentToParts(value:AnyRef):Array[Part]={
+//      case value:BsonArray => value.asArray().toArray().map(documentToPart()) //Error here
+//    }
+//    def documentToPart(value:AnyRef):Part= value match {
+//      case doc:BsonDocument => new Part(doc.get("name").asString().getValue, doc.get("isBroken").asBoolean().getValue, doc.get("hoursToFix").asInt32().getValue)
+//    }
+
 }

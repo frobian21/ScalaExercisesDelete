@@ -94,8 +94,4 @@ object MongoCRUD extends DBConnection {
       case doc:BsonDocument => new Part(doc.get("name").asString().getValue, doc.get("isBroken").asBoolean().getValue, doc.get("hoursToFix").asInt32().getValue)
     }
   }
-//    def documentToPart(value:AnyRef):Part= value match {
-//      case doc:BsonDocument => new Part(doc.get("name").asString().getValue, doc.get("isBroken").asBoolean().getValue, doc.get("hoursToFix").asInt32().getValue)
-//    }
-
 }

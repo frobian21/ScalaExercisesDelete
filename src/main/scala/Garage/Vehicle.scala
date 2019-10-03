@@ -1,8 +1,6 @@
 package Garage
 
-import scala.util.Random
-
-abstract class Vehicle(){
+abstract class Vehicle() {
   val id: String
   val regNo: String
   val make: String
@@ -10,9 +8,11 @@ abstract class Vehicle(){
   val parts: Array[Part]
   val owner: Customer
 }
-object Vehicle{
+
+object Vehicle {
   var id = 100
-  def generateId():String ={
+
+  def generateId(): String = {
     id += 1
     id.toString
   }

@@ -1,11 +1,9 @@
 package Garage
 
-import org.mongodb.scala.MongoClient
 import org.bson.BsonDocument
 import org.mongodb.scala._
-import org.mongodb.scala.bson.{BsonBoolean, BsonString}
+import org.mongodb.scala.bson.{BsonArray, BsonBoolean, BsonString}
 import org.mongodb.scala.model.Filters.{equal, or}
-import org.mongodb.scala.model.Updates._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
@@ -22,13 +20,13 @@ object MongoCRUD extends DBConnection {
         .map(part =>Document( BsonDocument parse part))
   }
   def vehicleToDocument(vehicle: Vehicle): Document={
-    val _type = vehicle match {
+    val type_ = vehicle match {
       case _: Car => "Car"
       case _ => "Bike"
     }
     Document(
       "id" -> vehicle.id,
-      "type" -> _type,
+      "type" -> type_,
       "regNo" -> vehicle.regNo,
       "make" -> vehicle.make,
       "isFixed" -> vehicle.isFixed,
@@ -84,7 +82,7 @@ object MongoCRUD extends DBConnection {
     }
   }
   def documentToParts(vehicleDoc:Document):Array[Part]={
-    vehicleDoc.get("parts").get.asArray().toArray().map{
+    vehicleDoc.get("parts").getOrElse(BsonArray.apply()).asArray().toArray().map{
       case doc:BsonDocument => new Part(doc.get("name").asString().getValue, doc.get("isBroken").asBoolean().getValue, doc.get("hoursToFix").asInt32().getValue)
     }
   }

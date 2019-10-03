@@ -1,6 +1,6 @@
 package Garage
 
-import scala.util.Random
+import java.security.SecureRandom
 
 case class Part(name: String, var isBroken: Boolean, var hoursToFix: Int = 0)
 
@@ -14,9 +14,9 @@ object Part{
     def getPartSet:Set[String]= acceptedParts--partList.collect{ case part:Part=>part.name}
 
     def generate(nameSet:Set[String]):Part= {
-      val chosenName = nameSet.toVector(Random.nextInt(nameSet.size))
-      val isBroken = Random.nextFloat() > 0.5
-      if (isBroken) Part(chosenName, isBroken, Random.between(1, 4))
+      val chosenName = nameSet.toVector(new SecureRandom().nextInt(nameSet.size))
+      val isBroken = new SecureRandom().nextBoolean()
+      if (isBroken) Part(chosenName, isBroken, new SecureRandom().nextInt( 3)+1)
       else Part(chosenName, isBroken)
     }
     partList.toArray

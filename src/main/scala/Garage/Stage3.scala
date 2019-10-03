@@ -13,6 +13,7 @@ object Main extends App{
   MongoCRUD.findVehicle(car.ID)
   MongoCRUD.removeVehicle(car.ID)
   MongoCRUD.findVehicle(car.ID)
-
+  val doc = MongoCRUD.vehicleToDocument(new Bike("hello", "my", new Customer("friends")))
+  println(MongoCRUD.documentToVehicle(doc).toString())
 
 }

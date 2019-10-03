@@ -1,8 +1,9 @@
 package Garage
 
 import org.mongodb.scala.MongoClient
-import org.bson.{BsonDocument, BsonArray}
+import org.bson.{BsonArray, BsonDocument}
 import org.mongodb.scala._
+import org.mongodb.scala.bson.BsonValue
 import org.mongodb.scala.model.Filters.{equal, _}
 import org.mongodb.scala.model.Updates._
 
@@ -25,7 +26,7 @@ object MongoCRUD extends DBConnection {
         .map(part =>Document( BsonDocument parse part))
   }
   def vehicleToDocument(vehicle: Vehicle):Document={
-    var _type = ""
+    var _type=""
     vehicle match {
       case _: Car =>_type = "Car"
       case _ => _type = "Bike"
@@ -76,28 +77,23 @@ object MongoCRUD extends DBConnection {
     Thread.sleep(1000)
     closeConnection(mongoClient)
   }
-
-//    def documentToCar(value:Document):Vehicle={
-//      new Car(value.get("ID").asInstanceOf[String],
-//        value.get("regNo").asInstanceOf[String],
-//        value.get("make").asInstanceOf[String],
-//        value.get("isFixed").asInstanceOf[Boolean],
-//        value.get("parts"),
-//        value.get("owner"))
-//    }
-//    def documentToBike(value:Document)={
-//    val parts:Array[Part] = documentToParts(value.get("parts"))
-//    val owner = new Customer(value.get("owner").getOrElse("").toString)
-//      Bike(value.get("ID").asInstanceOf[String],
-//        value.get("regNo").asInstanceOf[String],
-//        value.get("make").asInstanceOf[String],
-//        value.get("isFixed").asInstanceOf[Boolean],
-//        parts,
-//        owner)
-//    }
-//    def documentToParts(value:AnyRef):Array[Part]={
-//      case value:BsonArray => value.asArray().toArray().map(documentToPart()) //Error here
-//    }
+  def documentToVehicle(vehicleDoc:Document):Vehicle={
+    val parts:Array[Part] = documentToParts(vehicleDoc)
+    val owner = new Customer(vehicleDoc.get("owner").get.asString().getValue)
+    val ID = vehicleDoc.get("ID").get.asString().getValue
+    val regNo = vehicleDoc.get("regNo").get.asString().getValue
+    val make = vehicleDoc.get("make").get.asString().getValue
+    val isFixed = vehicleDoc.get("isFixed").get.asBoolean().getValue
+    vehicleDoc.get("type").get.asString().getValue match {
+      case "Car" => Car(ID, regNo, make, isFixed, parts, owner)
+      case "Bike" => Bike(ID, regNo, make, isFixed, parts, owner)
+    }
+  }
+  def documentToParts(vehicleDoc:Document):Array[Part]={
+    vehicleDoc.get("parts").get.asArray().toArray().map{
+      case doc:BsonDocument => new Part(doc.get("name").asString().getValue, doc.get("isBroken").asBoolean().getValue, doc.get("hoursToFix").asInt32().getValue)
+    }
+  }
 //    def documentToPart(value:AnyRef):Part= value match {
 //      case doc:BsonDocument => new Part(doc.get("name").asString().getValue, doc.get("isBroken").asBoolean().getValue, doc.get("hoursToFix").asInt32().getValue)
 //    }

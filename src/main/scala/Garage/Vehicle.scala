@@ -3,7 +3,7 @@ package Garage
 import scala.util.Random
 
 abstract class Vehicle(){
-  val ID: String
+  val Id: String
   val regNo: String
   val make: String
   val isFixed: Boolean

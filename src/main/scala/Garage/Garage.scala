@@ -1,15 +1,13 @@
 package Garage
 
 class Garage(){
-  var vehicles = List[Vehicle]()
-  var employees = List[Employee]()
   var isOpen: Boolean = true
 
   def addVehicle(vehicle: Vehicle): Unit ={
-    vehicles ::= vehicle
+    MongoCRUD.createVehicle(vehicle)
   }
   def removeVehicle(searchTerm: String): Unit ={
-    vehicles = vehicles.filter(_.ID != searchTerm).filter(_.make != searchTerm)
+    MongoCRUD.removeVehicle(searchTerm)
   }
   def registerEmployee(employee: Employee): Unit ={
     employees ::= employee

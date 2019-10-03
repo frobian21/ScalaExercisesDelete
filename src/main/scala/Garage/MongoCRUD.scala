@@ -20,13 +20,13 @@ object MongoCRUD extends DBConnection {
         .map(part =>Document( BsonDocument parse part))
   }
   def vehicleToDocument(vehicle: Vehicle): Document={
-    val type_ = vehicle match {
+    val vehicleType = vehicle match {
       case _: Car => "Car"
       case _ => "Bike"
     }
     Document(
       "id" -> vehicle.id,
-      "type" -> type_,
+      "type" -> vehicleType,
       "regNo" -> vehicle.regNo,
       "make" -> vehicle.make,
       "isFixed" -> vehicle.isFixed,

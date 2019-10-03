@@ -11,21 +11,17 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
 object MongoCRUD extends DBConnection {
-  def openVehicleConnection(): (MongoClient, MongoCollection[Document]) ={
-    val mongoClient = getClient()
-    val db = getDatabase(mongoClient, "garage")
-    (mongoClient, getCollection(db, "vehicles"))
+  def openVehicleConnection(): (MongoClient, MongoCollection[Document])={
+    (getClient(), getCollection(getDatabase(getClient(), "garage"), "vehicles"))
   }
-  def openEmployeeConnection(): (MongoClient, MongoCollection[Document]) ={
-    val mongoClient = getClient()
-    val db = getDatabase(mongoClient, "garage")
-    (mongoClient, getCollection(db, "customers"))
+  def openEmployeeConnection(): (MongoClient, MongoCollection[Document])={
+    (getClient(), getCollection(getDatabase(getClient(), "garage"), "employees"))
   }
-  def partsToDocument(parts: Array[Part]):Array[Document] ={
+  def partsToDocument(parts: Array[Part]): Array[Document]={
     parts.map{part => s"{name: '${part.name}', isBroken: ${part.isBroken}, hoursToFix: ${part.hoursToFix}}"}
         .map(part =>Document( BsonDocument parse part))
   }
-  def vehicleToDocument(vehicle: Vehicle):Document={
+  def vehicleToDocument(vehicle: Vehicle): Document={
     var _type=""
     vehicle match {
       case _: Car =>_type = "Car"

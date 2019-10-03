@@ -10,14 +10,13 @@ class Garage(){
     MongoCRUD.removeVehicle(searchTerm)
   }
   def registerEmployee(employee: Employee): Unit ={
-    employees ::= employee
+  //useMongoDB
   }
   def fixVehicle(searchID: String): Unit ={
-//    vehicles.filter(_.ID==searchID).foreach(_.isFixed=true)
+  //useMongoDB
   }
   def getContents(): Unit ={
-    println("Garage contents are:")
-    vehicles.foreach(println(_))
+  //use MongoDB
   }
   def openGarage(): Unit ={
     if (!isOpen){

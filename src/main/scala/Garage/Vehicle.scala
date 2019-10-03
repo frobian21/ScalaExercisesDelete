@@ -1,20 +1,19 @@
 package Garage
 
-import scala.util.Random
-
-abstract case class Vehicle(){
-  val ID: String
+abstract class Vehicle() {
+  val id: String
   val regNo: String
   val make: String
-  var isFixed: Boolean
-  var days: Int
+  val isFixed: Boolean
   val parts: Array[Part]
   val owner: Customer
 }
-object Vehicle{
-  var ID = 100
-  def generateID():String ={
-    ID += 1
-    ID.toString
+
+object Vehicle {
+  var id = 100
+
+  def generateId(): String = {
+    id += 1
+    id.toString
   }
 }

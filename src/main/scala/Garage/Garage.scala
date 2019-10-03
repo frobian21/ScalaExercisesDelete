@@ -1,30 +1,26 @@
 package Garage
 
 class Garage(){
-  var vehicles = List[Vehicle]()
-  var employees = List[Employee]()
   var isOpen: Boolean = true
 
   def addVehicle(vehicle: Vehicle): Unit ={
-    vehicles ::= vehicle
+    MongoCRUD.createVehicle(vehicle)
   }
   def removeVehicle(searchTerm: String): Unit ={
-    vehicles = vehicles.filter(_.ID != searchTerm).filter(_.make != searchTerm)
+    MongoCRUD.removeVehicle(searchTerm)
   }
-  def registerEmployee(employee: Employee)={
-    employees ::= employee
+  def registerEmployee(employee: Employee): Unit ={
+  //useMongoDB
   }
   def fixVehicle(searchID: String): Unit ={
-    vehicles.filter(_.ID==searchID).foreach(_.isFixed=true)
+  //useMongoDB
   }
   def getContents(): Unit ={
-    println("Garage contents are:")
-    vehicles.map(println(_))
+  //use MongoDB
   }
   def openGarage(): Unit ={
-    if(isOpen==false){
+    if (!isOpen){
       isOpen = true
-      vehicles.foreach(_.days += 1)
     }
   }
   def closeGarage(): Unit ={

@@ -27,7 +27,7 @@ object MongoCRUD extends DBConnection {
       case _ => "Bike"
     }
     Document(
-      "Id" -> vehicle.Id,
+      "id" -> vehicle.id,
       "type" -> _type,
       "regNo" -> vehicle.regNo,
       "make" -> vehicle.make,
@@ -49,22 +49,22 @@ object MongoCRUD extends DBConnection {
   }
   def findVehicle(searchTerm:String):Unit={
     val (mongoClient, vehicleCollection) = openVehicleConnection()
-    vehicleCollection.find(or(equal("make", searchTerm), equal("Id", searchTerm))).foreach(doc => documentToVehicle(doc))
+    vehicleCollection.find(or(equal("make", searchTerm), equal("id", searchTerm))).foreach(doc => documentToVehicle(doc))
     Thread.sleep(1000)
     closeConnection(mongoClient)
   }
   def updateVehicle(vehicle: Vehicle):Unit={
     val (mongoClient, vehicleCollection) = openVehicleConnection()
-    vehicleCollection.findOneAndReplace(equal("Id", vehicle.Id), vehicleToDocument(vehicle)).headOption().onComplete{
+    vehicleCollection.findOneAndReplace(equal("id", vehicle.id), vehicleToDocument(vehicle)).headOption().onComplete{
       case Success(_) => println("Update Completed")
       case Failure(error) => error.printStackTrace()
     }
     Thread.sleep(1000)
     closeConnection(mongoClient)
   }
-  def removeVehicle(searchId:String): Unit ={
+  def removeVehicle(searchid:String): Unit ={
     val (mongoClient, vehicleCollection) = openVehicleConnection()
-    vehicleCollection.deleteOne(equal("Id", searchId)).headOption().onComplete{
+    vehicleCollection.deleteOne(equal("id", searchid)).headOption().onComplete{
       case Success(_) => println("Removal Completed")
       case Failure(error) => error.printStackTrace()
     }
@@ -74,13 +74,13 @@ object MongoCRUD extends DBConnection {
   def documentToVehicle(vehicleDoc:Document):Vehicle={
     val parts:Array[Part] = documentToParts(vehicleDoc)
     val owner = new Customer(vehicleDoc.get("owner").getOrElse(BsonString.apply("NONE")).asString().getValue)
-    val Id = vehicleDoc.get("Id").getOrElse(BsonString.apply("NONE")).asString().getValue
+    val id = vehicleDoc.get("id").getOrElse(BsonString.apply("NONE")).asString().getValue
     val regNo = vehicleDoc.get("regNo").getOrElse(BsonString.apply("NONE")).asString().getValue
     val make = vehicleDoc.get("make").getOrElse(BsonString.apply("NONE")).asString().getValue
     val isFixed = vehicleDoc.get("isFixed").getOrElse(BsonBoolean.apply(false)).asBoolean().getValue
     vehicleDoc.get("type").getOrElse(BsonString.apply("Car")).asString().getValue match {
-      case "Car" => Car(Id, regNo, make, isFixed, parts, owner)
-      case "Bike" => Bike(Id, regNo, make, isFixed, parts, owner)
+      case "Car" => Car(id, regNo, make, isFixed, parts, owner)
+      case "Bike" => Bike(id, regNo, make, isFixed, parts, owner)
     }
   }
   def documentToParts(vehicleDoc:Document):Array[Part]={

@@ -50,10 +50,9 @@ object MongoCRUD extends DBConnection {
   }
   def findVehicle(searchTerm:String):Unit={
     val (mongoClient, vehicleCollection) = openVehicleConnection()
-    val vehicle = vehicleCollection.find(or(equal("make", searchTerm), equal("ID", searchTerm))).foreach(doc => documentToVehicle(doc))
+    vehicleCollection.find(or(equal("make", searchTerm), equal("ID", searchTerm))).foreach(doc => documentToVehicle(doc))
     Thread.sleep(1000)
     closeConnection(mongoClient)
-    vehicle
   }
   def updateVehicle(vehicle: Vehicle):Unit={
     val (mongoClient, vehicleCollection) = openVehicleConnection()
